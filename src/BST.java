@@ -151,37 +151,6 @@ public class BST<Key extends Comparable<Key>, Value>
 		return x;
 	}
 
-	/**
-	 * Median key. If the tree has N keys k1 < k2 < k3 < ... < kN, then their
-	 * median key is the element at position (N+1)/2 (where "/" here is integer
-	 * division)
-	 *
-	 * @return the median key, or null if the tree is empty.
-	 */
-	public Key median()
-	{
-		if (isEmpty()) return null;
-		int medianLoc = (size(root) - 1) / 2;
-		return median(root, medianLoc);
-	}
-
-	private Key median(Node node, int medianLoc)
-	{
-		int position = rank(node.key);
-		// right
-		if (position < medianLoc)
-		{
-			return median(node.right, medianLoc);
-		}
-		// left
-		else if (position > medianLoc)
-		{
-			return median(node.left, medianLoc);
-		} else
-		{
-			return node.key;
-		}
-	}
 
 	/**
 	 * Print all keys of the tree in a sequence, in-order. That is, for each
