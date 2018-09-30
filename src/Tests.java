@@ -1,7 +1,13 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+
+
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 public class Tests
 {
@@ -173,12 +179,12 @@ public class Tests
 		tree.put(100, 100);
 		assertEquals("Check Double put with same key", Integer.valueOf(100), tree.get(100));
 	}
-	
-	
+
 	@Test
-	public void testLCA() {
-	
-		//simple above node LCA
+	public void testLCA()
+	{
+
+		// simple above node LCA
 		BST<Integer, Integer> tree = new BST<Integer, Integer>();
 		tree.put(80, 80);
 		tree.put(40, 40);
@@ -186,8 +192,39 @@ public class Tests
 		tree.put(20, 20);
 		tree.put(60, 60);
 
-		tree.getLCA(20, 60);
+		System.out.println(tree.printKeysInOrder());
+
+		// test simple 1 above
+		assertEquals("", Integer.valueOf(40), tree.getLCA(20, 60));
+
+		// test non existant node
+		assertEquals("", null, tree.getLCA(30, 60));
 		
+		//check same ancentor is  including self
+		assertEquals("", Integer.valueOf(40), tree.getLCA(60, 40));
+	}
+
+	@Test
+	public void testFindPath()
+	{
+		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+		List<Integer> test1 = new ArrayList<>();
+		assertEquals("", null, tree.getLCA(30, 60));
+		
+		
+		tree.put(80, 80);
+		tree.put(40, 40);
+		tree.put(100, 100);
+		tree.put(20, 20);
+		tree.put(60, 60);
+		//check simple path
+		assertEquals(tree.findPath(tree.root, Integer.valueOf(20), test1),true);
+		
+		//check no path
+		assertEquals(tree.findPath(tree.root.left, Integer.valueOf(100), test1),false);
+		
+		//check same item is true
+		assertEquals(tree.findPath(tree.root, Integer.valueOf(80), test1),true);
 	}
 
 }
