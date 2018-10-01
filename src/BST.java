@@ -48,14 +48,10 @@ public class BST<Key extends Comparable<Key>, Value>
 
 	private Value findLCAInternal(Node root, Value n1, Value n2)
 	{
-
 		if (!findPath(root, n1, path1) || !findPath(root, n2, path2)) return null;
-
 		int i;
 		for (i = 0; i < path1.size() && i < path2.size(); i++)
-
 			if (!path1.get(i).equals(path2.get(i))) break;
-
 		return path1.get(i - 1);
 	}
 

@@ -181,7 +181,7 @@ public class Tests
 	}
 
 	@Test
-	public void testLCA()
+	public void testBasicLCA()
 	{
 
 		// simple above node LCA
@@ -190,6 +190,30 @@ public class Tests
 		tree.put(40, 40);
 		tree.put(100, 100);
 		tree.put(20, 20);
+		tree.put(60, 60);
+
+		System.out.println(tree.printKeysInOrder());
+
+		// test simple 1 above
+		assertEquals("", Integer.valueOf(40), tree.getLCA(20, 60));
+
+		// test non existant node
+		assertEquals("", null, tree.getLCA(30, 60));
+		
+		//check same ancentor is  including self
+		assertEquals("", Integer.valueOf(40), tree.getLCA(60, 40));
+	}
+	
+	
+	@Test
+	public void testSpecialCaseDuplicateInputA()
+	{
+
+		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+		tree.put(80, 80);
+		tree.put(40, 40);
+		tree.put(100, 100);
+		tree.put(40, 40);
 		tree.put(60, 60);
 
 		System.out.println(tree.printKeysInOrder());
