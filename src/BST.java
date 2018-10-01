@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /*************************************************************************
  * Binary Search Tree class. Adapted from Sedgewick and Wayne.
  *
@@ -97,17 +99,9 @@ public class BST<Key extends Comparable<Key>, Value>
 	}
 
 	/**
-	 * Tree height.
-	 *
-	 * Asymptotic worst-case running time using Theta notation: Theta(N)
-	 * Explanation: In the worst case it will have to go through every node in a
-	 * straight line fashion
+	 * Tree height
 	 * 
 	 * @return the number of links from the root to the deepest leaf.
-	 *
-	 *         Example 1: for an empty tree this should return -1. Example 2:
-	 *         for a tree with only one node it should return 0. Example 3: for
-	 *         the following tree it should return 2. B / \ A C \ D
 	 * 
 	 * 
 	 */
@@ -125,8 +119,7 @@ public class BST<Key extends Comparable<Key>, Value>
 	}
 
 	/**
-	 * Search BST for given key. Does there exist a key-value pair with given
-	 * key?
+	 *
 	 *
 	 * @param key
 	 *            the search key
@@ -173,6 +166,9 @@ public class BST<Key extends Comparable<Key>, Value>
 	 */
 	public void put(Key key, Value val)
 	{
+		// prevent duplicate entry
+		if (contains(key)) return;
+
 		if (val == null)
 		{
 			delete(key);
@@ -196,19 +192,6 @@ public class BST<Key extends Comparable<Key>, Value>
 	}
 
 	/**
-	 * Print all keys of the tree in a sequence, in-order. That is, for each
-	 * node, the keys in the left subtree should appear before the key in the
-	 * node. Also, for each node, the keys in the right subtree should appear
-	 * before the key in the node. For each subtree, its keys should appear
-	 * within a parenthesis.
-	 *
-	 * Example 1: Empty tree -- output: "()" Example 2: Tree containing only "A"
-	 * -- output: "(()A())" Example 3: Tree: B / \ A C \ D
-	 *
-	 * output: "((()A())B(()C(()D())))"
-	 *
-	 * output of example in the assignment:
-	 * (((()A(()C()))E((()H(()M()))R()))S(()X()))
 	 *
 	 * @return a String with all keys in the tree, in order, parenthesized.
 	 */
@@ -232,11 +215,6 @@ public class BST<Key extends Comparable<Key>, Value>
 	}
 
 	/**
-	 * Deteles a key from a tree (if the key is in the tree). Note that this
-	 * method works symmetrically from the Hibbard deletion: If the node to be
-	 * deleted has two child nodes, then it needs to be replaced with its
-	 * predecessor (not its successor) node.
-	 *
 	 * @param key
 	 *            the key to delete
 	 */
