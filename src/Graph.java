@@ -1,3 +1,8 @@
-public class Graph {
-	
+public class Graph
+{
+
+	public void test()
+	{
+	}
+
 }
