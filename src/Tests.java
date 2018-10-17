@@ -28,6 +28,7 @@ public class Tests
 		scanner.close();
 		
 		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
 		
 		for(int a : ints) {
 			tree.put(a,a);
@@ -187,7 +188,9 @@ public class Tests
 	{
 		// Check Null
 		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
 		tree.put(1, null);
+		graph.put(1, null);
 		assertNull("Check Null", tree.get(1));
 
 		// Check Put
@@ -200,6 +203,16 @@ public class Tests
 		tree.put(70, 70);
 		tree.put(50, 50);
 		tree.put(60, 60);
+		
+		graph = new DAG<Integer, Integer>();
+		graph.put(80, 80);
+		graph.put(90, 90);
+		graph.put(40, 40);
+		graph.put(20, 20);
+		graph.put(30, 30);
+		graph.put(70, 70);
+		graph.put(50, 50);
+		graph.put(60, 60);
 
 		// root
 		assertEquals("Check the ability to get root node.", "80", "" + tree.get(80));
