@@ -205,8 +205,14 @@ public class Tests
 		tree.put(60, 60);
 		
 		graph = new DAG<Integer, Integer>();
+		assertEquals(graph.size(),0);
+		
 		graph.put(80, 80);
+		assertEquals(graph.size(),1);
 		graph.put(90, 90);
+		
+		assertEquals(graph.size(),2);
+		
 		graph.put(40, 40);
 		graph.put(20, 20);
 		graph.put(30, 30);
@@ -214,6 +220,9 @@ public class Tests
 		graph.put(50, 50);
 		graph.put(60, 60);
 
+		assertEquals(graph.size(),8);
+		
+		
 		// root
 		assertEquals("Check the ability to get root node.", "80", "" + tree.get(80));
 		// Level 1
@@ -306,5 +315,22 @@ public class Tests
 		// check same item is true
 		assertEquals(tree.findPath(tree.root, Integer.valueOf(80), test1), true);
 	}
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
