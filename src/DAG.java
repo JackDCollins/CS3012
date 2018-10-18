@@ -27,6 +27,10 @@ public class DAG<Key extends Comparable<Key>, Value>
 		}
 
 	}
+	
+	
+	//returns the size of the graph
+	public int size() {  return nodes.size(); }
 
 	public boolean put(Key key, Value val)
 	{
