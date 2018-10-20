@@ -337,6 +337,16 @@ public class Tests
 		// check same ancentor is including self
 		assertEquals("", Integer.valueOf(40), tree.getLCA(60, 40));
 	}
+	
+	@Test
+	public void checkNull() {
+		
+		BST<Integer, Integer> tree = new BST<Integer, Integer>();
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+			assertNull("Testing null handle", tree.getLCA(6, null));
+			assertNull("Testing null handle", graph.getLCA(6, null));
+
+	}
 
 	@Test
 	public void testFindPath()

@@ -1,3 +1,4 @@
+import java.util.Set;
 
 public class DAG<Key extends Comparable<Key>, Value>
 {
@@ -31,7 +32,6 @@ public class DAG<Key extends Comparable<Key>, Value>
 			return this.key;
 		}
 
-
 	}
 
 	// returns the size of the graph
@@ -53,7 +53,7 @@ public class DAG<Key extends Comparable<Key>, Value>
 
 	public boolean contains(Key key)
 	{
-		boolean r =  get(key) != null;
+		boolean r = get(key) != null;
 		return r;
 	}
 
@@ -63,6 +63,12 @@ public class DAG<Key extends Comparable<Key>, Value>
 		if (key != null) for (DAGNode node : nodes)
 			if (key.equals(node.key())) answer = node.val;
 		return answer;
+	}
+
+	public Set<Key> getLCA(Key keyA, Key keyB)
+	{
+
+		return null;
 	}
 
 	public boolean insertEdge(Key key1, Key key2)
