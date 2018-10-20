@@ -4,8 +4,10 @@ import static org.junit.Assert.assertNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -26,12 +28,13 @@ public class Tests
 			ints.add(scanner.nextInt());
 		}
 		scanner.close();
-		
+
 		BST<Integer, Integer> tree = new BST<Integer, Integer>();
 		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
-		
-		for(int a : ints) {
-			tree.put(a,a);
+
+		for (int a : ints)
+		{
+			tree.put(a, a);
 		}
 		List<Integer> test1 = new ArrayList<>();
 		assertEquals(tree.findPath(tree.root, Integer.valueOf(20), test1), true);
@@ -41,10 +44,10 @@ public class Tests
 
 		// check same item is true
 		assertEquals(tree.findPath(tree.root, Integer.valueOf(80), test1), true);
-		
+
 		// test simple 1 above
 		assertEquals("", Integer.valueOf(40), tree.getLCA(20, 60));
-		//assertEquals("", Integer.valueOf(40), tree.getLCA(540, 120));
+		// assertEquals("", Integer.valueOf(40), tree.getLCA(540, 120));
 
 		// test non existant node
 		assertEquals("", null, tree.getLCA(30, 60));
@@ -81,14 +84,12 @@ public class Tests
 		tree.put(5, 5);
 		assertEquals("Check Doesnt contain 15", false, tree.contains(15));
 		assertEquals("Check Contins 5", true, tree.contains(5));
-		
+
 		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
 		assertEquals("Check Doesnt Contain", false, graph.contains(10));
 		graph.put(5, 5);
 		assertEquals("Check Doesnt contain 15", false, graph.contains(15));
 		assertEquals("Check Contins 5", true, graph.contains(5));
-		
-		
 
 	}
 
@@ -130,8 +131,7 @@ public class Tests
 		assertEquals("Check Left Node", "5", String.valueOf(tree.get(5)));
 		assertEquals("Check the ability to get root node with two childs and that is all.", "10",
 				String.valueOf(tree.get(10)));
-		
-		
+
 		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
 		assertNull("Check Empty", graph.get(1));
 
@@ -165,7 +165,6 @@ public class Tests
 		assertEquals("Check Left Node", "5", String.valueOf(graph.get(5)));
 		assertEquals("Check the ability to get root node with two childs and that is all.", "10",
 				String.valueOf(graph.get(10)));
-
 
 	}
 
@@ -247,16 +246,16 @@ public class Tests
 		tree.put(70, 70);
 		tree.put(50, 50);
 		tree.put(60, 60);
-		
+
 		graph = new DAG<Integer, Integer>();
-		assertEquals(graph.size(),0);
-		
+		assertEquals(graph.size(), 0);
+
 		graph.put(80, 80);
-		assertEquals(graph.size(),1);
+		assertEquals(graph.size(), 1);
 		graph.put(90, 90);
-		
-		assertEquals(graph.size(),2);
-		
+
+		assertEquals(graph.size(), 2);
+
 		graph.put(40, 40);
 		graph.put(20, 20);
 		graph.put(30, 30);
@@ -264,9 +263,8 @@ public class Tests
 		graph.put(50, 50);
 		graph.put(60, 60);
 
-		assertEquals(graph.size(),8);
-		
-		
+		assertEquals(graph.size(), 8);
+
 		// root
 		assertEquals("Check the ability to get root node.", "80", "" + tree.get(80));
 		// Level 1
@@ -310,6 +308,31 @@ public class Tests
 
 		// check same ancentor is including self
 		assertEquals("", Integer.valueOf(40), tree.getLCA(60, 40));
+
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+		graph.put(20, 20);
+		graph.put(40, 40);
+		graph.put(30, 30);
+		graph.put(60, 60);
+		graph.put(80, 80);
+		graph.put(90, 90);
+		graph.put(100, 100);
+
+
+		graph.insertEdge(20, 60);
+		graph.insertEdge(40, 60);
+		graph.insertEdge(40, 80);
+		graph.insertEdge(30, 80);
+		graph.insertEdge(30, 90);
+		graph.insertEdge(60, 90);
+		graph.insertEdge(60, 100);
+		graph.insertEdge(60, 100);
+
+		Set<Integer> result = new HashSet<Integer>();
+		result.add(40);
+		result.add(30);
+		assertEquals("Checking two common ancestors of a proper directed acyclic graph", result, graph.getLCA(80, 90));
+
 	}
 
 	@Test
@@ -337,14 +360,15 @@ public class Tests
 		// check same ancentor is including self
 		assertEquals("", Integer.valueOf(40), tree.getLCA(60, 40));
 	}
-	
+
 	@Test
-	public void checkNull() {
-		
+	public void checkNull()
+	{
+
 		BST<Integer, Integer> tree = new BST<Integer, Integer>();
 		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
-			assertNull("Testing null handle", tree.getLCA(6, null));
-			assertNull("Testing null handle", graph.getLCA(6, null));
+		assertNull("Testing null handle", tree.getLCA(6, null));
+		assertNull("Testing null handle", graph.getLCA(6, null));
 
 	}
 
@@ -369,22 +393,5 @@ public class Tests
 		// check same item is true
 		assertEquals(tree.findPath(tree.root, Integer.valueOf(80), test1), true);
 	}
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
