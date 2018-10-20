@@ -81,6 +81,14 @@ public class Tests
 		tree.put(5, 5);
 		assertEquals("Check Doesnt contain 15", false, tree.contains(15));
 		assertEquals("Check Contins 5", true, tree.contains(5));
+		
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+		assertEquals("Check Doesnt Contain", false, graph.contains(10));
+		graph.put(5, 5);
+		assertEquals("Check Doesnt contain 15", false, graph.contains(15));
+		assertEquals("Check Contins 5", true, graph.contains(5));
+		
+		
 
 	}
 
