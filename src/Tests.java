@@ -130,6 +130,42 @@ public class Tests
 		assertEquals("Check Left Node", "5", String.valueOf(tree.get(5)));
 		assertEquals("Check the ability to get root node with two childs and that is all.", "10",
 				String.valueOf(tree.get(10)));
+		
+		
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+		assertNull("Check Empty", graph.get(1));
+
+		// Check 2 Node graph
+		graph = new DAG<Integer, Integer>();
+		graph.put(30, 30);
+		graph.put(50, 50);
+		assertEquals("Check Root 30", "30", String.valueOf(graph.get(30)));
+		assertEquals("Check Solo Right Node", "50", String.valueOf(graph.get(50)));
+
+		graph = new DAG<Integer, Integer>();
+		graph.put(80, 80);
+		graph.put(90, 90);
+		graph.put(40, 40);
+		graph.put(20, 20);
+		graph.put(30, 30);
+		graph.put(70, 70);
+		graph.put(50, 50);
+		graph.put(60, 60);
+
+		assertNull("Check no Node", graph.get(0));
+		assertEquals("Check Node Right", "90", String.valueOf(graph.get(90)));
+		assertEquals("Check Left Node", "30", String.valueOf(graph.get(30)));
+		assertEquals("Check Double Node", "40", String.valueOf(graph.get(40)));
+
+		graph = new DAG<Integer, Integer>();
+		graph.put(10, 10);
+		graph.put(20, 20);
+		graph.put(5, 5);
+		assertEquals("Check Right Node", "20", String.valueOf(graph.get(20)));
+		assertEquals("Check Left Node", "5", String.valueOf(graph.get(5)));
+		assertEquals("Check the ability to get root node with two childs and that is all.", "10",
+				String.valueOf(graph.get(10)));
+
 
 	}
 
