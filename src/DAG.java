@@ -1,10 +1,11 @@
+import java.util.HashSet;
 import java.util.Set;
 
 public class DAG<Key extends Comparable<Key>, Value>
 {
 
 	private int vertices;
-	private Bag<DAGNode> nodes;
+	public Bag<DAGNode> nodes;
 
 	DAG()
 	{
@@ -16,20 +17,25 @@ public class DAG<Key extends Comparable<Key>, Value>
 	{
 		private Key key;
 		private Value val;
-		public Bag<DAGNode> descendants;
-		public int inDegree;
+		public Bag<DAGNode> children;
+		public int vertices;
 
 		public DAGNode(Key key, Value val)
 		{
 			this.key = key;
 			this.val = val;
-			this.inDegree = 0;
-			this.descendants = (Bag<DAGNode>) new Bag();
+			this.vertices = 0;
+			this.children = (Bag<DAGNode>) new Bag();
 		}
 
 		public Key key()
 		{
 			return this.key;
+		}
+
+		public void addChild(DAGNode node)
+		{
+			children.add(node);
 		}
 
 	}
@@ -65,19 +71,39 @@ public class DAG<Key extends Comparable<Key>, Value>
 		return answer;
 	}
 
-	public Set<Key> getLCA(Key keyA, Key keyB)
+	private DAGNode getNode(Key key)
 	{
-
-		return null;
+		DAGNode answer = null;
+		if (key != null) for (DAGNode node : nodes)
+			if (key.equals(node.key())) answer = node;
+		return answer;
 	}
 
 	public boolean insertEdge(Key key1, Key key2)
 	{
-		// TODO
+		if (key1 != null && key2 != null && (!key1.equals(key2)) && (contains(key1) && contains(key2)))
+		{
+			DAGNode source = getNode(key1);
+			DAGNode dest = getNode(key2);
+
+			if (!hasEdge(source, dest) && !isCycle(dest, source))
+			{
+				source.addChild(dest);
+				dest.vertices++;
+				return true;
+			}
+		}
 		return false;
 	}
 
-	private boolean isDAGCycle(DAGNode source, DAGNode dest)
+	private boolean hasEdge(DAGNode source, DAGNode dest)
+	{
+		for (DAGNode node : source.children)
+			if (node.key.equals(dest.key())) return true;
+		return false;
+	}
+
+	private boolean isCycle(DAGNode source, DAGNode dest)
 	{
 		// TODO
 		return false;
