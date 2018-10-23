@@ -126,4 +126,34 @@ public class DAG<Key extends Comparable<Key>, Value>
 
 	}
 
+	public Set<Key> getLCA(Key keyA, Key keyB)
+	{
+
+		Set<Key> answer = null;
+
+		if (contains(keyA) && contains(keyB))
+		{
+			answer = new HashSet<Key>();
+			Set<DAGNode> keyANodes = new HashSet<DAGNode>();
+			Set<DAGNode> keyBNodes = new HashSet<DAGNode>();
+			Set<DAGNode> commonNodes = new HashSet<DAGNode>();
+
+			for (DAGNode node : this.nodes)
+				if (node.vertices == 0)
+				{
+					dfs(keyANodes, node, keyA);
+					dfs(keyBNodes, node, keyB);
+				}
+
+			for (DAGNode n : commonNodes)
+			{
+				boolean hasChild = false;
+				for (DAGNode child : n.children)
+					if (commonNodes.contains(child)) hasChild = true;
+				if (!hasChild) answer.add(n.key());
+			}
+		}
+		return answer;
+	}
+
 }
