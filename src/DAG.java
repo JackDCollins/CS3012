@@ -144,6 +144,9 @@ public class DAG<Key extends Comparable<Key>, Value>
 					dfs(keyANodes, node, keyA);
 					dfs(keyBNodes, node, keyB);
 				}
+			//Add the common Nodes by going through all the nodes in A's path/line
+			for (DAGNode n : keyANodes)
+				if (keyBNodes.contains(n)) commonNodes.add(n);
 
 			for (DAGNode n : commonNodes)
 			{
