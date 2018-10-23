@@ -109,4 +109,21 @@ public class DAG<Key extends Comparable<Key>, Value>
 		return false;
 	}
 
+	private boolean dfs(Set<DAGNode> set, DAGNode n, Key key)
+	{
+		if (n.key().equals(key))
+		{
+			set.add(n);
+			return true;
+		} else
+		{
+			boolean res = false;
+			for (DAGNode child : n.children)
+				res |= dfs(set, child, key);
+			if (res) set.add(n);
+			return res;
+		}
+
+	}
+
 }
