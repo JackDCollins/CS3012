@@ -378,6 +378,23 @@ public class Tests
 	
 
 	}
+	
+	@Test
+	public void testSingleElement()
+	{
+		//assuming an element can in conjunction with another be it's own LCA this should result an answer of 1
+
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+		graph.put(1, 1);
+
+		graph.insertEdge(1, 1);
+
+		Set<Integer> result = new HashSet<Integer>();
+		result.add(1);
+		assertEquals(result, graph.getLCA(1,1));
+
+
+	}
 
 	@Test
 	public void testSpecialCaseDuplicateInputA()
