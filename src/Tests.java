@@ -350,7 +350,32 @@ public class Tests
 
 		Set<Integer> result = new HashSet<Integer>();
 
-		assertEquals("Checking two common ancestors of a proper directed acyclic graph", result, graph.getLCA(20,30));
+		assertEquals(result, graph.getLCA(20,30));
+		
+		graph = new DAG<Integer, Integer>();
+		graph.put(1, 1);
+		graph.put(2, 2);
+		graph.put(3, 3);
+		graph.put(10, 10);
+		graph.put(20, 20);
+		graph.put(4, 4);
+
+
+
+		graph.insertEdge(1, 2);
+		graph.insertEdge(2, 3);
+		graph.insertEdge(3, 4);
+		graph.insertEdge(10, 3);
+		graph.insertEdge(10, 20);
+		
+		result = new HashSet<Integer>();
+		
+		assertEquals(result, graph.getLCA(20,2));
+
+		result = new HashSet<Integer>();
+		result.add(2);
+		assertEquals(result, graph.getLCA(3,2));
+	
 
 	}
 
