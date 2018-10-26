@@ -105,7 +105,18 @@ public class DAG<Key extends Comparable<Key>, Value>
 
 	private boolean isCycle(DAGNode source, DAGNode dest)
 	{
-		// TODO
+		return recursivceIsCycle(source, dest);
+	}
+
+	// conducts a depth first search to see if a cycle is in the graph
+	private boolean recursivceIsCycle(DAGNode currentNode, DAGNode dst)
+	{
+		boolean answer = false;
+		for (DAGNode n : currentNode.children)
+		{
+			if (n.key().equals(dst.key())) { return true; }
+			answer = answer || recursivceIsCycle(n, dst);
+		}
 		return false;
 	}
 
@@ -144,7 +155,8 @@ public class DAG<Key extends Comparable<Key>, Value>
 					dfs(keyANodes, node, keyA);
 					dfs(keyBNodes, node, keyB);
 				}
-			//Add the common Nodes by going through all the nodes in A's path/line
+			// Add the common Nodes by going through all the nodes in A's
+			// path/line
 			for (DAGNode n : keyANodes)
 				if (keyBNodes.contains(n)) commonNodes.add(n);
 
