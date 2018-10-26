@@ -332,6 +332,27 @@ public class Tests
 		assertEquals("Checking two common ancestors of a proper directed acyclic graph", result, graph.getLCA(80, 90));
 
 	}
+	
+	
+	@Test
+	public void testDAGCycle()
+	{
+
+		DAG<Integer, Integer> graph = new DAG<Integer, Integer>();
+		graph.put(20, 20);
+		graph.put(40, 40);
+		graph.put(30, 30);
+
+
+		graph.insertEdge(20, 40);
+		graph.insertEdge(40, 30);
+		graph.insertEdge(30, 20);
+
+		Set<Integer> result = new HashSet<Integer>();
+
+		assertEquals("Checking two common ancestors of a proper directed acyclic graph", result, graph.getLCA(20,30));
+
+	}
 
 	@Test
 	public void testSpecialCaseDuplicateInputA()
